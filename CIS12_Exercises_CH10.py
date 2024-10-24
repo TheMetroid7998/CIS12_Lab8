@@ -59,4 +59,70 @@ def lon_len():
 #lon_len()
 
 
-"""10.X.X"""
+"""10.11.2"""
+
+def value_counts(string):
+    counter = {}
+    for letter in string:
+        if letter not in counter:
+            counter[letter] = 1
+        else:
+            counter[letter] += 1
+    #print(counter)
+    return counter
+
+def get_value_counts(string):
+    counter = {} # initialize list
+    for letter in string: # iterates over each letter in the string
+        counter[letter] = counter.get(letter, 0) + 1 # for each index in the string,
+        # create a key/value with the letter and count and update that count as repeats are detected
+    #print(counter)
+    return counter
+
+#value_counts('brontosaurus')
+#get_value_counts('brontosaurus')
+
+"""10.11.3"""
+
+def has_duplicates(string):
+    counter = get_value_counts(string) # use the previous function to count letters and return a dictionary
+    for k, v in counter.items(): # iterate over the dictionary by key and value
+        if v > 1: return True # if the value (count) is greater than 1, then it is duplicated
+    return False
+
+#print(has_duplicates('brontosaurus'))
+
+"""10.11.4"""
+
+def find_repeats(counter):
+    counts = [] #initialize list
+    for k, v in counter.items(): # iterates over dictionary counter items by key and value
+        if v > 1: # if the value is over 1 (indicating a repeat/duplicate)
+            counts.append(k) # append that value (letter) to the list
+    return counts
+
+"""10.11.5"""
+
+counter1 = value_counts('brontosaurus')
+counter2 = value_counts('apatosaurus')
+
+def add_counters(*dicts):
+    master_counts = {} # initialize the dictionary
+    for d in dicts: # iterate over however many dictionaries applied
+        for k, v in d.items(): # iterate by key and value over each item in the current dictionary
+            master_counts[k] = master_counts.get(k, 0) + v # add to the master dict with key (letter)
+            # and each count based on the supplied dictionary
+    return master_counts # return the master dictionary
+
+#print(add_counters(counter1, counter2))
+
+"""10.11.6"""
+
+def is_interlocking(word):
+    first = word[0::2]
+    #print(first)
+    second = word[1::2]
+    #print(second)
+    print(f"'{word}' can be unpacked into '{first}' and '{second}'")
+
+is_interlocking('schooled')
